@@ -17,13 +17,9 @@ import pymysql
 
 @st.cache_data
 def load_data():
-    # MySQL connection setup
-    connection_string = "mysql+pymysql://root:wordpass@localhost/scm"
-    engine = create_engine(connection_string)
+    from mysql_connector import fetch_sales_data
 
-    # Query the sales table
-    df = pd.read_sql("SELECT * FROM sales", engine)
-
+    df = fetch_sales_data()
     # Column renaming (same as before)
     mapper = {
         'Order_ID':'order_ID', 'Status':'ship_status', 'Fulfilment':'fullfilment',
